@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class BrowserUI extends GridPane {
@@ -20,6 +22,13 @@ public class BrowserUI extends GridPane {
 	private Button refreshButton;
 	private Button goButton;
 	
+	// Images
+	private Image backButtonImage;
+	private Image forwardButtonImage;
+	private Image refreshButtonImage;
+	private Image goButtonImage;
+	
+	
 	public BrowserUI(JavaBrowserLauncher launcher) {
 		this.launcher = launcher;
 		
@@ -33,11 +42,17 @@ public class BrowserUI extends GridPane {
 		add(searchField, 3, 0);
 	}
 	
+	public void initImages() {
+		backButtonImage = new Image(getClass().getResourceAsStream("/res/back.png"));
+		forwardButtonImage = new Image("res/forw.png");
+	}
+	
 	public void initButtons() {
-		backButton = new Button("<-");
+		backButton = new Button();
+		backButton.setGraphic(new ImageView(backButtonImage));
 		add(backButton, 0, 0);
 		
-		forwardButton = new Button("->");
+		forwardButton = new Button();
 		add(forwardButton, 1, 0);
 		
 		// Refresh Button
