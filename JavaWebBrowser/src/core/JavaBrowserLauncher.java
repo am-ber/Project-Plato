@@ -15,6 +15,8 @@ public class JavaBrowserLauncher extends Application {
 	
 	private Scene mainScene;
 	private GridPane mainPane;
+	
+	private JavaBrowserUpdateThread updateThread;
 	private Browser browser;
 	private BrowserUI browserUI;
 
@@ -30,17 +32,19 @@ public class JavaBrowserLauncher extends Application {
 		// Load in created classes and send the launcher through
 		browser = new Browser(this);
 		browserUI = new BrowserUI(this);
+		updateThread = new JavaBrowserUpdateThread(this);
 		
 		// Add elements to GridPane
 		mainPane.add(browserUI, 0, 0);
 		mainPane.add(browser, 0, 1);
 		
-		mainScene = new Scene(mainPane,750,500, Color.web("#666970"));
+		mainScene = new Scene(mainPane,1440,720, Color.web("#666970"));
 		
 		// Set window configurations and add main scene
 		primary.setTitle("Plato Browser");
 		primary.setScene(mainScene);
 		primary.show();
+		updateThread.start();
 	}
 	
 	// Is used to communicate to the browser what web page to go to
@@ -50,8 +54,24 @@ public class JavaBrowserLauncher extends Application {
 		browser.setWebPage(url);
 	}
 	
+	// Without setting the webpage updates the url from traveling links
+	public void setURI(String uri) {
+		currentURL = uri;
+		browserUI.searchField.setText(uri);
+	}
+	
+	// Returns the address of the current site
+	public String getURI() {
+		return browser.browser.getEngine().getDocument().getBaseURI();
+	}
+	
 	// Will tell the browser to refresh the previous saved current URL
 	public void refreshURL() {
 		browser.setWebPage(currentURL);
+	}
+	
+	// Interrupts the thread safely
+	public void stop() {
+		updateThread.interrupt();
 	}
 }

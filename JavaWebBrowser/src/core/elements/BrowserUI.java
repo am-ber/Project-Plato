@@ -1,5 +1,8 @@
 package core.elements;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import core.JavaBrowserLauncher;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,54 +12,66 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import tools.CP;
 
 public class BrowserUI extends GridPane {
-	
+
 	public TextField searchField;
-	
+
 	private JavaBrowserLauncher launcher;
-	
+
 	// Buttons
 	private Button backButton;
 	private Button forwardButton;
 	private Button refreshButton;
 	private Button goButton;
-	
+	private Button test;
+
 	// Images
 	private Image backButtonImage;
 	private Image forwardButtonImage;
 	private Image refreshButtonImage;
 	private Image goButtonImage;
-	
-	
+
 	public BrowserUI(JavaBrowserLauncher launcher) {
 		this.launcher = launcher;
-		
+
 		setPadding(new Insets(10, 10, 10, 10));
-		setVgap(5); 
-	    setHgap(5);
-	    
+		setVgap(5);
+		setHgap(5);
+
+		try {
+			initImages();
+		} catch (FileNotFoundException f) {
+			CP.println("Whoops! looks like that file isn't there!");
+		} catch (Exception e) {
+			CP.println("Something else happened and we can't explain it.");
+		}
 		initButtons();
 		searchField = new TextField(launcher.currentURL);
 		searchField.setPrefColumnCount(50);
 		add(searchField, 3, 0);
 	}
-	
-	public void initImages() {
-		backButtonImage = new Image(getClass().getResourceAsStream("/res/back.png"));
-		forwardButtonImage = new Image("res/forw.png");
+
+	public void initImages() throws FileNotFoundException {
+		backButtonImage = new Image(new FileInputStream("res/back.png"));
+		forwardButtonImage = new Image(new FileInputStream("res/forw.png"));
+		refreshButtonImage = new Image(new FileInputStream("res/refresh.png"));
+		goButtonImage = new Image(new FileInputStream("res/search.png"));
 	}
-	
+
 	public void initButtons() {
 		backButton = new Button();
 		backButton.setGraphic(new ImageView(backButtonImage));
 		add(backButton, 0, 0);
-		
+
 		forwardButton = new Button();
+		forwardButton.setGraphic(new ImageView(forwardButtonImage));
 		add(forwardButton, 1, 0);
-		
+
 		// Refresh Button
-		refreshButton = new Button("F5");
+		refreshButton = new Button();
+		refreshButton.setGraphic(new ImageView(refreshButtonImage));
 		refreshButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -64,9 +79,10 @@ public class BrowserUI extends GridPane {
 			}
 		});
 		add(refreshButton, 2, 0);
-		
+
 		// Go button
-		goButton = new Button("O");
+		goButton = new Button();
+		goButton.setGraphic(new ImageView(goButtonImage));
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -74,5 +90,14 @@ public class BrowserUI extends GridPane {
 			}
 		});
 		add(goButton, 4, 0);
+		
+		test = new Button(":o");
+		test.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				CP.println("Does nothing yet.");
+			}
+		});
+		add(test, 5, 0);
 	}
 }

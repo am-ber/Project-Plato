@@ -13,7 +13,7 @@ import tools.CP;
 
 public class Browser extends Region {
 
-	private final WebView browser = new WebView();
+	public final WebView browser = new WebView();
 	private final WebEngine webEngine = browser.getEngine();
 	
 	private JavaBrowserLauncher launcher;
@@ -28,10 +28,6 @@ public class Browser extends Region {
 		// add the web view to the scene
 		getChildren().add(browser);
 
-	}
-	
-	public void getHTML() {
-		//CP.print(browser.getEngine().getDocument().getBaseURI().toLowerCase());
 	}
 	
 	public void setWebPage(String url) {
@@ -51,10 +47,10 @@ public class Browser extends Region {
 	}
 
 	protected double computePrefWidth(double height) {
-		return 750;
+		return 1040;
 	}
 
 	protected double computePrefHeight(double width) {
-		return 500;
+		return 720;
 	}
 }
