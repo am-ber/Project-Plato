@@ -1,6 +1,5 @@
 package core.elements;
 
-import core.JavaBrowserLauncher;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -9,17 +8,13 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import tools.CP;
 
 public class Browser extends Region {
 
 	public final WebView browser = new WebView();
 	private final WebEngine webEngine = browser.getEngine();
-	
-	private JavaBrowserLauncher launcher;
 
-	public Browser(JavaBrowserLauncher launcher) {
-		this.launcher = launcher;
+	public Browser() {
 		
 		// apply the styles
 		getStyleClass().add("browser");
@@ -34,7 +29,7 @@ public class Browser extends Region {
 		webEngine.load(url);
 	}
 
-	private Node createSpacer() {
+	public Node createSpacer() {
 		Region spacer = new Region();
 		HBox.setHgrow(spacer, Priority.ALWAYS);
 		return spacer;

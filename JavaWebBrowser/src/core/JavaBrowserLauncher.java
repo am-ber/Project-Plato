@@ -3,9 +3,11 @@ package core;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import tools.CP;
+
+import java.net.URL;
+
 import core.elements.Browser;
 import core.elements.BrowserUI;
 
@@ -28,9 +30,9 @@ public class JavaBrowserLauncher extends Application {
 	@Override
 	public void start(Stage primary) throws Exception {
 		mainPane = new GridPane();
+		browser = new Browser();
 		
 		// Load in created classes and send the launcher through
-		browser = new Browser(this);
 		browserUI = new BrowserUI(this);
 		updateThread = new JavaBrowserUpdateThread(this);
 		
@@ -38,7 +40,13 @@ public class JavaBrowserLauncher extends Application {
 		mainPane.add(browserUI, 0, 0);
 		mainPane.add(browser, 0, 1);
 		
-		mainScene = new Scene(mainPane,1440,720, Color.web("#666970"));
+		mainScene = new Scene(mainPane,1440,720);
+		
+		URL url = getClass().getResource("res/default.css");
+		if (url != null)
+			mainScene.getStylesheets().add(url.toExternalForm());
+		else
+			CP.println("css file wasn't found.");
 		
 		// Set window configurations and add main scene
 		primary.setTitle("Plato Browser");
@@ -48,7 +56,7 @@ public class JavaBrowserLauncher extends Application {
 	}
 	
 	// Is used to communicate to the browser what web page to go to
-	public void setURL(String url) {
+	public void goToURL(String url) {
 		currentURL = url;
 		browserUI.searchField.setText(url);
 		browser.setWebPage(url);
@@ -56,6 +64,10 @@ public class JavaBrowserLauncher extends Application {
 	
 	// Without setting the webpage updates the url from traveling links
 	public void setURI(String uri) {
+		// Checks to see if the address has actually changed
+		if (currentURL.equals(uri)) {
+			return;
+		}
 		currentURL = uri;
 		browserUI.searchField.setText(uri);
 	}
