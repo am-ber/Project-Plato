@@ -2,10 +2,12 @@ package core;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import tools.CP;
 
+import java.io.FileInputStream;
 import java.net.URL;
 
 import core.elements.Browser;
@@ -40,7 +42,7 @@ public class JavaBrowserLauncher extends Application {
 		mainPane.add(browserUI, 0, 0);
 		mainPane.add(browser, 0, 1);
 		
-		mainScene = new Scene(mainPane,1440,720);
+		mainScene = new Scene(mainPane,1040,720);
 		
 		URL url = getClass().getResource("res/default.css");
 		if (url != null)
@@ -50,6 +52,7 @@ public class JavaBrowserLauncher extends Application {
 		
 		// Set window configurations and add main scene
 		primary.setTitle("Plato Browser");
+		primary.getIcons().add(new Image(new FileInputStream("res/img/logohatwht.png")));
 		primary.setScene(mainScene);
 		primary.show();
 		updateThread.start();

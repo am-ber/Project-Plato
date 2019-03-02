@@ -27,13 +27,14 @@ public class BrowserUI extends GridPane {
 	private Button forwardButton;
 	private Button refreshButton;
 	private Button goButton;
-	private Button test;
+	private Button hackerMenueButton;
 
 	// Images
 	private Image backButtonImage;
 	private Image forwardButtonImage;
 	private Image refreshButtonImage;
 	private Image goButtonImage;
+	private Image hackerMenueImage;
 
 	public BrowserUI(JavaBrowserLauncher launcher) {
 		this.launcher = launcher;
@@ -60,15 +61,17 @@ public class BrowserUI extends GridPane {
 				}
 			}
 		});
-		searchField.setPrefColumnCount(50);
+		searchField.setPrefColumnCount(68);
 		add(searchField, 3, 0);
 	}
 	
 	// Checks the input for basic https and www stuff on an address
 	public String checkSearchField(String input) {
 		String sender = "";
-		if (!input.contains("http://") | !input.contains("https://")) {
-			sender += "http://";
+		if (!input.contains("http://")) {
+			if (!input.contains("https://")) {
+				sender += "http://";
+			}
 			if (!input.contains("www.")) {
 				sender += "www.";
 			}
@@ -79,10 +82,11 @@ public class BrowserUI extends GridPane {
 
 	// inits the images
 	public void initImages() throws FileNotFoundException {
-		backButtonImage = new Image(new FileInputStream("res/img/back.png"));
-		forwardButtonImage = new Image(new FileInputStream("res/img/forw.png"));
+		backButtonImage = new Image(new FileInputStream("res/img/backv2.png"));
+		forwardButtonImage = new Image(new FileInputStream("res/img/forwv2.png"));
 		refreshButtonImage = new Image(new FileInputStream("res/img/refresh.png"));
 		goButtonImage = new Image(new FileInputStream("res/img/search.png"));
+		hackerMenueImage = new Image(new FileInputStream("res/img/hackhat.png"));
 	}
 
 	// inits the buttons
@@ -121,13 +125,15 @@ public class BrowserUI extends GridPane {
 		});
 		add(goButton, 4, 0);
 		
-		test = new Button(":o");
-		test.setOnAction(new EventHandler<ActionEvent>() {
+		hackerMenueButton = new Button();
+		hackerMenueButton.setStyle("-fx-background-color: #DADADA;" + "-fx-border-color: #797979;");
+		hackerMenueButton.setGraphic(new ImageView(hackerMenueImage));
+		hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				CP.println("Does nothing yet.");
 			}
 		});
-		add(test, 5, 0);
+		add(hackerMenueButton, 5, 0);
 	}
 }
