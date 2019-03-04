@@ -1,4 +1,4 @@
-<img src="https://github.com/zach-bell/Project-Plato/blob/master/JavaWebBrowser/res/img/logohatv2.png?raw=true">
+<img src="https://github.com/zach-bell/Project-Plato/blob/master/JavaWebBrowser/res/img/logohatv2.png?raw=true"><br>
 # Project-PLATO
 
 ## What is PLATO?
