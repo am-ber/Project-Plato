@@ -23,7 +23,7 @@ public class JavaBrowserUpdateThread extends Thread {
 				// Will safely exit the thread
 				CP.println("--- Thread interrupted.");
 				Thread.currentThread().interrupt();
-				break;
+				return;
 			} catch (Exception e) {
 				// If the webpage isn't loaded yet it will
 				CP.println("--- No webpage yet.");
