@@ -1,6 +1,5 @@
-<img src="https://github.com/zach-bell/Project-Plato/blob/master/JavaWebBrowser/res/img/logohatv2.png?raw=true">Plato Logo</img>
 # Project-PLATO
-
+<img src="https://github.com/zach-bell/Project-Plato/blob/master/JavaWebBrowser/res/img/logohatv2.png?raw=true"><br>
 ## What is PLATO?
 PLATO stands for "Purification of Lousy Arguments Testing Onslaught". What this means for its services, is that it is a tool used to simulate SQL Injection Attacks against a web page and determining weaknesses arising from a lack of sanitation for inputs supplied by forms and delivered to the database for the system.
 
