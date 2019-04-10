@@ -45,11 +45,16 @@ public class JavaBrowserLauncher extends Application {
 		
 		mainScene = new Scene(mainPane,1040,720);
 		
-		URL url = getClass().getResource("res/default.css");
-		if (url != null)
-			mainScene.getStylesheets().add(url.toExternalForm());
-		else
-			CP.println("css file wasn't found.");
+		// Add the CSS file
+		try {
+			URL url = getClass().getResource("/res/default.css");
+			if (url != null)
+				mainScene.getStylesheets().add(url.toExternalForm());
+			else
+				CP.println("css file wasn't found, oh well.");
+		} catch (Exception e) {
+			// do nothing cause we don't care you can't find the css file THAT'S RIGHT THERE
+		}
 		
 		// Set window configurations and add main scene
 		primary.setTitle("Plato Browser");
