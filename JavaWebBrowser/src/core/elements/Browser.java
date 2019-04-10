@@ -1,5 +1,6 @@
 package core.elements;
 
+import core.JavaBrowserLauncher;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -12,17 +13,18 @@ import javafx.scene.web.WebView;
 public class Browser extends Region {
 
 	public final WebView browser = new WebView();
+	public BrowserUI browserUI;
 	private final WebEngine webEngine = browser.getEngine();
 
-	public Browser() {
-		
+	public Browser(JavaBrowserLauncher launcher) {
 		// apply the styles
 		getStyleClass().add("browser");
 		// load the web page
-		webEngine.load("https://www.google.com");
+		webEngine.load(launcher.currentURL);
 		// add the web view to the scene
 		getChildren().add(browser);
-
+		
+		browserUI = new BrowserUI(launcher);
 	}
 	
 	public void setWebPage(String url) {

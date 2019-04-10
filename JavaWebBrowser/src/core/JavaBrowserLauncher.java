@@ -23,7 +23,6 @@ public class JavaBrowserLauncher extends Application {
 	
 	private JavaBrowserUpdateThread updateThread;
 	private Browser browser;
-	private BrowserUI browserUI;
 
 	public static void main(String[] args) {
 		CP.println("Starting Browser.");
@@ -33,14 +32,13 @@ public class JavaBrowserLauncher extends Application {
 	@Override
 	public void start(Stage primary) throws Exception {
 		mainPane = new GridPane();
-		browser = new Browser();
+		browser = new Browser(this);	// Literally pass the launcher just to get the currentURL
 		
 		// Load in created classes and send the launcher through
-		browserUI = new BrowserUI(this);
 		updateThread = new JavaBrowserUpdateThread(this);
 		
 		// Add elements to GridPane
-		mainPane.add(browserUI, 0, 0);
+		mainPane.add(browser.browserUI, 0, 0);
 		mainPane.add(browser, 0, 1);
 		
 		mainScene = new Scene(mainPane,1040,720);
@@ -67,7 +65,7 @@ public class JavaBrowserLauncher extends Application {
 	// Is used to communicate to the browser what web page to go to
 	public void goToURL(String url) {
 		currentURL = url;
-		browserUI.searchField.setText(url);
+		browser.browserUI.searchField.setText(url);
 		browser.setWebPage(url);
 	}
 	
@@ -78,7 +76,7 @@ public class JavaBrowserLauncher extends Application {
 			return;
 		}
 		currentURL = uri;
-		browserUI.searchField.setText(uri);
+		browser.browserUI.searchField.setText(uri);
 	}
 	
 	// Returns the address of the current site

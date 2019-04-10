@@ -31,6 +31,7 @@ public class JavaBrowserUpdateThread extends Thread {
 					Thread.sleep(2000);
 				} catch (Exception e1) {
 					CP.println("--- Something else happened.");
+					break;
 				}
 			}
 		}
