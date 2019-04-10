@@ -92,18 +92,15 @@ public class BrowserUI extends GridPane {
 	// inits the buttons
 	public void initButtons() {
 		backButton = new Button();
-		backButton.setStyle("-fx-background-color: #DADADA;" + "-fx-border-color: #797979;");
 		backButton.setGraphic(new ImageView(backButtonImage));
 		add(backButton, 0, 0);
 
 		forwardButton = new Button();
-		forwardButton.setStyle("-fx-background-color: #DADADA;" + "-fx-border-color: #797979;");
 		forwardButton.setGraphic(new ImageView(forwardButtonImage));
 		add(forwardButton, 1, 0);
 
 		// Refresh Button
 		refreshButton = new Button();
-		refreshButton.setStyle("-fx-background-color: #DADADA;" + "-fx-border-color: #797979;");
 		refreshButton.setGraphic(new ImageView(refreshButtonImage));
 		refreshButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -115,7 +112,6 @@ public class BrowserUI extends GridPane {
 
 		// Go button
 		goButton = new Button();
-		goButton.setStyle("-fx-background-color: #DADADA;" + "-fx-border-color: #797979;");
 		goButton.setGraphic(new ImageView(goButtonImage));
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -126,7 +122,6 @@ public class BrowserUI extends GridPane {
 		add(goButton, 4, 0);
 		
 		hackerMenueButton = new Button();
-		hackerMenueButton.setStyle("-fx-background-color: #DADADA;" + "-fx-border-color: #797979;");
 		hackerMenueButton.setGraphic(new ImageView(hackerMenueImage));
 		hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
