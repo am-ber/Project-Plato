@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 
 public class HackingToolsUI extends GridPane {
 	
+	@SuppressWarnings("unused")
 	private JavaBrowserLauncher launcher;
 	
 	public HackingToolsUI(JavaBrowserLauncher launcher) {
@@ -15,7 +16,5 @@ public class HackingToolsUI extends GridPane {
 		setVgap(5);
 		setHgap(5);
 		
-		
 	}
-
 }

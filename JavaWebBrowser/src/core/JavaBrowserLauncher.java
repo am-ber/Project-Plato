@@ -1,6 +1,5 @@
 package core;
-//asdfasfa
-// testing slkfgjaelkfahfkjfnaskjfn
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -9,7 +8,6 @@ import javafx.stage.Stage;
 import tools.CP;
 
 import java.io.FileInputStream;
-import java.net.URL;
 
 import core.elements.Browser;
 
@@ -72,6 +70,10 @@ public class JavaBrowserLauncher extends Application {
 		}
 		currentURL = uri;
 		browser.browserUI.searchField.setText(uri);
+	}
+	
+	public Browser getBrowser() {
+		return browser;
 	}
 	
 	// Returns the address of the current site

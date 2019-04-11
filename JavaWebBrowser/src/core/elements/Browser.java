@@ -9,11 +9,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import tools.CP;
 
 public class Browser extends Region {
 
 	public final WebView browser = new WebView();
 	public BrowserUI browserUI;
+	public String outerHTML;
+	
 	private final WebEngine webEngine = browser.getEngine();
 
 	public Browser(JavaBrowserLauncher launcher) {
@@ -29,6 +32,22 @@ public class Browser extends Region {
 	
 	public void setWebPage(String url) {
 		webEngine.load(url);
+	}
+	
+	public void updateOuterHtml() {
+		outerHTML = getHtml();
+	}
+	
+	public String getHtml() {
+		try
+		{
+			return (String) webEngine.executeScript("document.documentElement.outerHTML");
+		}
+		catch(Exception ex)
+		{
+			CP.println("Error: " + ex.getMessage());
+			return "lemme get uhhh, outer html pls?";
+		}
 	}
 
 	public Node createSpacer() {

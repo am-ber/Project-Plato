@@ -126,7 +126,7 @@ public class BrowserUI extends GridPane {
 		hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println("Does nothing yet.");
+				CP.println(launcher.getBrowser().outerHTML);
 			}
 		});
 		add(hackerMenueButton, 5, 0);
