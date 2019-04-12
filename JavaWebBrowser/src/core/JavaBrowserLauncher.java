@@ -20,6 +20,7 @@ public class JavaBrowserLauncher extends Application {
 	
 	private JavaBrowserUpdateThread updateThread;
 	private Browser browser;
+	
 
 	public static void main(String[] args) {
 		CP.println("Starting Browser.");

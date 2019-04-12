@@ -10,12 +10,14 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import tools.CP;
+import tools.Scraper;
 
 public class Browser extends Region {
 
 	public final WebView browser = new WebView();
 	public BrowserUI browserUI;
 	public String outerHTML;
+	public Scraper scrape = new Scraper();
 	
 	private final WebEngine webEngine = browser.getEngine();
 
