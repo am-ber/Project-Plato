@@ -1,5 +1,9 @@
 package core;
 
+import java.io.FileInputStream;
+
+import core.elements.Browser;
+import core.elements.HackingToolsUI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -7,20 +11,20 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import tools.CP;
 
-import java.io.FileInputStream;
-
-import core.elements.Browser;
-
 public class JavaBrowserLauncher extends Application {
 	
 	public String currentURL = "https://www.google.com";
+	public Scene mainScene;
+	public final int initWidth = 1400;
 	
-	private Scene mainScene;
 	private GridPane mainPane;
-	
 	private JavaBrowserUpdateThread updateThread;
 	private Browser browser;
+<<<<<<< HEAD
 	
+=======
+	public HackingToolsUI htUI;
+>>>>>>> master
 
 	public static void main(String[] args) {
 		CP.println("Starting Browser.");
@@ -31,6 +35,7 @@ public class JavaBrowserLauncher extends Application {
 	public void start(Stage primary) throws Exception {
 		mainPane = new GridPane();
 		browser = new Browser(this);	// Literally pass the launcher just to get the currentURL
+		htUI = new HackingToolsUI(this);
 		
 		// Load in created classes and send the launcher through
 		updateThread = new JavaBrowserUpdateThread(this);
@@ -38,8 +43,9 @@ public class JavaBrowserLauncher extends Application {
 		// Add elements to GridPane
 		mainPane.add(browser.browserUI, 0, 0);
 		mainPane.add(browser, 0, 1);
+		mainPane.add(htUI, 1, 1);
 		
-		mainScene = new Scene(mainPane,1040,720);
+		mainScene = new Scene(mainPane,1400,720);
 		
 		// try to add the CSS file
 		try {

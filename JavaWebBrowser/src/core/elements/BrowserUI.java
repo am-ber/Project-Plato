@@ -21,7 +21,7 @@ public class BrowserUI extends GridPane {
 	public TextField searchField;
 
 	private JavaBrowserLauncher launcher;
-
+	private boolean toggleHackerMenu = true;
 	// Buttons
 	private Button backButton;
 	private Button forwardButton;
@@ -79,6 +79,15 @@ public class BrowserUI extends GridPane {
 		}
 		return input;
 	}
+	
+	// Toggles visibility of hacker menu
+	public void toggleHackerMenu() {
+		launcher.mainScene.getWindow().setWidth(toggleHackerMenu ? 1400 : launcher.initWidth);
+		launcher.htUI.setVisible(toggleHackerMenu);
+		toggleHackerMenu = !toggleHackerMenu;
+		
+		CP.println(launcher.getBrowser().outerHTML);
+	}
 
 	// inits the images
 	public void initImages() throws FileNotFoundException {
@@ -126,7 +135,7 @@ public class BrowserUI extends GridPane {
 		hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println(launcher.getBrowser().outerHTML);
+				toggleHackerMenu();
 			}
 		});
 		add(hackerMenueButton, 5, 0);

@@ -47,7 +47,7 @@ public class Browser extends Region {
 		}
 		catch(Exception ex)
 		{
-			CP.println("Error: " + ex.getMessage());
+			CP.println("Browser Error: " + ex.getMessage());
 			return "lemme get uhhh, outer html pls?";
 		}
 	}
