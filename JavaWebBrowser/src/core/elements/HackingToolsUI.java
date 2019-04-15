@@ -31,6 +31,7 @@ public class HackingToolsUI extends GridPane {
 		
 		menuLabel = new Label("Hacker Man");
 		add(menuLabel, 0, 0);
+		initButtons();
 	}
 	
 	public void initButtons() {

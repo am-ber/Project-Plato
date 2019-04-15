@@ -82,9 +82,10 @@ public class BrowserUI extends GridPane {
 	
 	// Toggles visibility of hacker menu
 	public void toggleHackerMenu() {
-		launcher.mainScene.getWindow().setWidth(toggleHackerMenu ? 1400 : launcher.initWidth);
-		launcher.htUI.setVisible(toggleHackerMenu);
+		CP.println("Toggled Hacker Menu");
 		toggleHackerMenu = !toggleHackerMenu;
+		launcher.mainScene.getWindow().setWidth(toggleHackerMenu ? launcher.initWidth : 1200);
+		launcher.htUI.setVisible(toggleHackerMenu);
 		
 		CP.println(launcher.getBrowser().outerHTML);
 	}
@@ -135,7 +136,7 @@ public class BrowserUI extends GridPane {
 		hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				toggleHackerMenu();
+				launcher.getBrowser().printHTML(launcher.cacheLocation);
 			}
 		});
 		add(hackerMenueButton, 5, 0);

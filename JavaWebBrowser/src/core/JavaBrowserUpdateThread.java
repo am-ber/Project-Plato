@@ -15,7 +15,7 @@ public class JavaBrowserUpdateThread extends Thread {
 			try {
 				// Updates the address bar if the user travles
 				launcher.setURI(launcher.getURI());
-				launcher.getBrowser().updateOuterHtml();
+//				launcher.getBrowser().updateOuterHtml();
 				
 				// Waits 0.75 seconds to update
 				Thread.sleep(750);
