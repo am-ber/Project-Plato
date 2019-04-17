@@ -1,5 +1,19 @@
 package core.elements;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+
 import core.JavaBrowserLauncher;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -20,8 +34,10 @@ public class Browser extends Region {
 	public Scraper scrape = new Scraper();
 	
 	private final WebEngine webEngine = browser.getEngine();
+	private JavaBrowserLauncher launcher;
 
 	public Browser(JavaBrowserLauncher launcher) {
+		this.launcher = launcher;
 		// apply the styles
 		getStyleClass().add("browser");
 		// load the web page
@@ -37,19 +53,29 @@ public class Browser extends Region {
 	}
 	
 	public void updateOuterHtml() {
-		outerHTML = getHtml();
+		printHTML(launcher.cacheLocation);
 	}
 	
-	public String getHtml() {
-		try
-		{
-			return (String) webEngine.executeScript("document.documentElement.outerHTML");
+	public void printHTML(String location) {   
+		try {
+			FileOutputStream fout = new FileOutputStream(location);
+			printDocument(webEngine.getDocument(), fout);
+		} catch (Exception e) {
+			CP.println("OuterHTML error: " + e.getMessage());
 		}
-		catch(Exception ex)
-		{
-			CP.println("Browser Error: " + ex.getMessage());
-			return "lemme get uhhh, outer html pls?";
-		}
+	}
+	
+	public void printDocument(Document doc, OutputStream out) throws IOException, TransformerException {
+	    TransformerFactory tf = TransformerFactory.newInstance();
+	    Transformer transformer = tf.newTransformer();
+	    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+	    transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+	    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+	    transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+	    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+	    transformer.transform(new DOMSource(doc), 
+	         new StreamResult(new OutputStreamWriter(out, "UTF-8")));
 	}
 
 	public Node createSpacer() {

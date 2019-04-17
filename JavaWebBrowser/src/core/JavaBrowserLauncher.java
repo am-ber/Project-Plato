@@ -14,8 +14,9 @@ import tools.CP;
 public class JavaBrowserLauncher extends Application {
 	
 	public String currentURL = "https://www.google.com";
+	public String cacheLocation = "res/cache.html";
 	public Scene mainScene;
-	public final int initWidth = 1400;
+	public final int initWidth = 1450;
 	
 	private GridPane mainPane;
 	private JavaBrowserUpdateThread updateThread;
@@ -45,7 +46,7 @@ public class JavaBrowserLauncher extends Application {
 		mainPane.add(browser, 0, 1);
 		mainPane.add(htUI, 1, 1);
 		
-		mainScene = new Scene(mainPane,1400,720);
+		mainScene = new Scene(mainPane,1450,720);
 		
 		// try to add the CSS file
 		try {
