@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import tools.CP;
 
 public class JavaBrowserLauncher extends Application {
-	
 	public String currentURL = "https://www.google.com";
 	public String cacheLocation = "res/cache.html";
 	public Scene mainScene;
@@ -21,11 +20,8 @@ public class JavaBrowserLauncher extends Application {
 	private GridPane mainPane;
 	private JavaBrowserUpdateThread updateThread;
 	private Browser browser;
-<<<<<<< HEAD
-	
-=======
+
 	public HackingToolsUI htUI;
->>>>>>> master
 
 	public static void main(String[] args) {
 		CP.println("Starting Browser.");
