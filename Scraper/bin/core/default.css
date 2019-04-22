@@ -1,0 +1,17 @@
+.dark-background {
+    -fx-background-color: #272727;
+    -fx-text-fill: #DADADA;
+}
+
+.button {
+    -fx-background-color: #DADADA;
+    -fx-border-color: #797979;
+}
+.button:active {
+	-fx-background-color: #488F8D;
+    -fx-border-color: #497A78;
+}
+.button:hover {
+    -fx-background-color: #C288BA;
+    -fx-border-color: #6E4869;
+}

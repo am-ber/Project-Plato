@@ -16,6 +16,7 @@ public class Scraper {
 	public String[] readInputHTML(Path path) throws IOException {
 		List<String> lines = Files.readAllLines(path, Charset.forName("UTF-8"));
 		String[] arr = lines.toArray(new String[lines.size()]);
+		System.out.println("Scraper: readInputHTML finished");
 		return arr;
 	}
 
@@ -25,8 +26,17 @@ public class Scraper {
 		for (int i = 0; i < html.length; i++) {
 
 			if (category == "all") {
-				if (html[i].contains("<input") || html[i].contains("<button")) {
-					int pos = html[i].indexOf("id=\"");
+				if (html[i].contains("<input") || html[i].contains("<button") || html[i].contains("<INPUT") || html[i].contains("<BUTTON")) {
+					int pos = 0;
+					if(html[i].contains("id=\"")) {
+					  pos = html[i].indexOf("id=\"");
+					} else if(html[i].contains("ID=\"")) {
+					  pos = html[i].indexOf("ID=\"");
+					} else if(html[i].contains("class=\"")) {
+					  pos = html[i].indexOf("class=\"");
+					} else {
+					  pos = html[i].indexOf("CLASS=\"");
+					}
 					int startingPos = pos;
 					if (pos != -1) {
 						List<Character> chars = new ArrayList<Character>();

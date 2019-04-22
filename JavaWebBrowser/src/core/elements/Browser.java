@@ -1,9 +1,16 @@
 package core.elements;
 
+import javafx.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -15,6 +22,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 
 import core.JavaBrowserLauncher;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -23,6 +31,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import jdk.nashorn.api.scripting.JSObject;
+import netscape.javascript.JSException;
 import tools.CP;
 import tools.Scraper;
 
@@ -31,12 +41,16 @@ public class Browser extends Region {
 	public final WebView browser = new WebView();
 	public BrowserUI browserUI;
 	public String outerHTML;
-	public Scraper scrape = new Scraper();
 	
 	private final WebEngine webEngine = browser.getEngine();
 	private JavaBrowserLauncher launcher;
+	
+	private Scraper scrape = new Scraper();
+	StringBuilder jQueryContents = new StringBuilder();
+	BufferedReader reader;
+	String line;
 
-	public Browser(JavaBrowserLauncher launcher) {
+	public Browser(JavaBrowserLauncher launcher) throws IOException {
 		this.launcher = launcher;
 		// apply the styles
 		getStyleClass().add("browser");
@@ -46,6 +60,54 @@ public class Browser extends Region {
 		getChildren().add(browser);
 		
 		browserUI = new BrowserUI(launcher);
+		
+		
+		
+		
+		reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("jquery")));
+		line = reader.readLine();
+		while(line != null) {
+	    jQueryContents.append(line);
+	    line = reader.readLine();
+	  }
+	  JSObject jQuery = null;
+	  try {
+	    jQuery = (JSObject) browser.getEngine().executeScript("$");
+	  } catch(JSException jse) {
+	    //
+	  }
+	  if(jQuery == null) {
+	    browser.getEngine().executeScript(jQueryContents.toString());
+	  }
+		
+		browserUI.hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent arg0) {
+        launcher.getBrowser().printHTML(launcher.cacheLocation);
+        
+        /* Start weird scraper test thing */
+        String filepath = "res/cache.html";
+        String[] lines = null;
+        try {
+          lines = scrape.readInputHTML(Paths.get(filepath));
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        List<String[]> identifiers = new ArrayList<String[]>();
+        identifiers = scrape.getIdentifiers(lines, "all");
+        for (int i = 0; i < identifiers.size(); i++) {
+          System.out.println(identifiers.get(i)[0] + ", Line:" + identifiers.get(i)[1] + ", Pos:" + identifiers.get(i)[2]);
+          //System.out.println("Hello");
+        }
+        /* End weird scraper test thing */
+        
+      }
+    });
+		
+		
+		
+		
 	}
 	
 	public void setWebPage(String url) {
@@ -66,16 +128,15 @@ public class Browser extends Region {
 	}
 	
 	public void printDocument(Document doc, OutputStream out) throws IOException, TransformerException {
-	    TransformerFactory tf = TransformerFactory.newInstance();
-	    Transformer transformer = tf.newTransformer();
-	    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-	    transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-	    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-	    transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-	    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+	  TransformerFactory tf = TransformerFactory.newInstance();
+	  Transformer transformer = tf.newTransformer();
+	  transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+	  transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+	  transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+	  transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+	  transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
-	    transformer.transform(new DOMSource(doc), 
-	         new StreamResult(new OutputStreamWriter(out, "UTF-8")));
+	  transformer.transform(new DOMSource(doc), new StreamResult(new OutputStreamWriter(out, "UTF-8")));
 	}
 
 	public Node createSpacer() {

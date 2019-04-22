@@ -1,7 +1,13 @@
 package core.elements;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import core.JavaBrowserLauncher;
 import javafx.event.ActionEvent;
@@ -15,6 +21,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import tools.CP;
+import tools.Scraper;
 
 public class BrowserUI extends GridPane {
 
@@ -27,7 +34,7 @@ public class BrowserUI extends GridPane {
 	private Button forwardButton;
 	private Button refreshButton;
 	private Button goButton;
-	private Button hackerMenueButton;
+	public Button hackerMenueButton;
 
 	// Images
 	private Image backButtonImage;
@@ -35,6 +42,8 @@ public class BrowserUI extends GridPane {
 	private Image refreshButtonImage;
 	private Image goButtonImage;
 	private Image hackerMenueImage;
+	
+	public Scraper scrape = new Scraper();
 
 	public BrowserUI(JavaBrowserLauncher launcher) {
 		this.launcher = launcher;
@@ -134,9 +143,27 @@ public class BrowserUI extends GridPane {
 		hackerMenueButton = new Button();
 		hackerMenueButton.setGraphic(new ImageView(hackerMenueImage));
 		hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
+		  @Override
 			public void handle(ActionEvent arg0) {
 				launcher.getBrowser().printHTML(launcher.cacheLocation);
+				
+				/* Start weird scraper test thing 
+				String filepath = "res/cache.html";
+				String[] lines = null;
+				try {
+					lines = scrape.readInputHTML(Paths.get(filepath));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				List<String[]> identifiers = new ArrayList<String[]>();
+				identifiers = scrape.getIdentifiers(lines, "all");
+				for (int i = 0; i < identifiers.size(); i++) {
+					System.out.println(identifiers.get(i)[0] + ", Line:" + identifiers.get(i)[1] + ", Pos:" + identifiers.get(i)[2]);
+				  //System.out.println("Hello");
+				}
+				End weird scraper test thing */
+				
 			}
 		});
 		add(hackerMenueButton, 5, 0);
