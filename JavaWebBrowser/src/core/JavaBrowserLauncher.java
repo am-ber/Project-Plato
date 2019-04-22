@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.web.WebEngine;
 import javafx.stage.Stage;
 import tools.CP;
 
@@ -58,6 +59,7 @@ public class JavaBrowserLauncher extends Application {
 		primary.setScene(mainScene);
 		primary.show();
 		updateThread.start();
+		
 	}
 	
 	// Is used to communicate to the browser what web page to go to
@@ -89,10 +91,36 @@ public class JavaBrowserLauncher extends Application {
 	// Will tell the browser to refresh the previous saved current URL
 	public void refreshURL() {
 		browser.setWebPage(currentURL);
+	  // Jude's testing stuff
+    executejQuery(browser.webEngine, "3.3.1", "res/jquery/jquery-3.3.1.min.js", "alert('Hello');");
 	}
 	
 	// Interrupts the thread safely
 	public void stop() {
 		updateThread.interrupt();
+	}
+	
+	
+	
+	
+	public static Object executejQuery(final WebEngine engine, String minVersion, String jQueryLocation, String script) {
+	  return engine.executeScript(
+	      "(function(window, document, version, callback) { "
+	          + "var j, d;"
+	          + "var loaded = false;"
+	          + "if (!(j = window.jQuery) || version > j.fn.jquery || callback(j, loaded)) {"
+	          + "  var script = document.createElement(\"script\");"
+	          + "  script.type = \"text/javascript\";"
+	          + "  script.src = \"" + jQueryLocation + "\";"
+	          + "  script.onload = script.onreadystatechange = function() {"
+	          + "    if (!loaded && (!(d = this.readyState) || d == \"loaded\" || d == \"complete\")) {"
+	          + "      callback((j = window.jQuery).noConflict(1), loaded = true);"
+	          + "      j(script).remove();"
+	          + "    }"
+	          + "  };"
+	          + "  document.documentElement.childNodes[0].appendChild(script) "
+	          + "} "
+	          + "})(window, document, \"" + minVersion + "\", function($, jquery_loaded) {" + script + "});"
+	  );
 	}
 }

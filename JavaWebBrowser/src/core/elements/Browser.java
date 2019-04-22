@@ -42,7 +42,7 @@ public class Browser extends Region {
 	public BrowserUI browserUI;
 	public String outerHTML;
 	
-	private final WebEngine webEngine = browser.getEngine();
+	public final WebEngine webEngine = browser.getEngine();
 	private JavaBrowserLauncher launcher;
 	
 	private Scraper scrape = new Scraper();
@@ -63,8 +63,8 @@ public class Browser extends Region {
 		
 		
 		
-		
-		reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("jquery")));
+		/*
+		reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("res/jquery/jquery-3.3.1.min.js")));
 		line = reader.readLine();
 		while(line != null) {
 	    jQueryContents.append(line);
@@ -72,20 +72,22 @@ public class Browser extends Region {
 	  }
 	  JSObject jQuery = null;
 	  try {
-	    jQuery = (JSObject) browser.getEngine().executeScript("$");
+	    jQuery = (JSObject) browser.getEngine().executeScript("");
 	  } catch(JSException jse) {
 	    //
 	  }
 	  if(jQuery == null) {
 	    browser.getEngine().executeScript(jQueryContents.toString());
 	  }
+	  */
+	  
 		
+	  /*
 		browserUI.hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
         launcher.getBrowser().printHTML(launcher.cacheLocation);
         
-        /* Start weird scraper test thing */
         String filepath = "res/cache.html";
         String[] lines = null;
         try {
@@ -100,10 +102,10 @@ public class Browser extends Region {
           System.out.println(identifiers.get(i)[0] + ", Line:" + identifiers.get(i)[1] + ", Pos:" + identifiers.get(i)[2]);
           //System.out.println("Hello");
         }
-        /* End weird scraper test thing */
         
       }
     });
+    */
 		
 		
 		
@@ -158,4 +160,5 @@ public class Browser extends Region {
 	protected double computePrefHeight(double width) {
 		return 720;
 	}
+	
 }
