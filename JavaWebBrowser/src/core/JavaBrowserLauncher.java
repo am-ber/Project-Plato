@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import tools.CP;
 
 public class JavaBrowserLauncher extends Application {
-	
 	public String currentURL = "https://www.google.com";
 	public String cacheLocation = "res/cache.html";
 	public Scene mainScene;

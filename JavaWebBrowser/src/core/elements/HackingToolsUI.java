@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import tools.CP;
+import tools.BobRoss;
 
 public class HackingToolsUI extends GridPane {
 	
@@ -16,11 +17,13 @@ public class HackingToolsUI extends GridPane {
 	
 	private Button tautologyAttackButton;
 	private Button secondOrderAttackButton;
-	private Button attack3Button;
-	private Button attack4Button;
-	private Button attack5Button;
+	private Button piggyBackQueryButton;
+	private Button unionAttackButton;
+	private Button storedProcedureButton;
 	
 	private Label menuLabel;
+	
+	private BobRoss residentBob;
 	
 	public HackingToolsUI(JavaBrowserLauncher launcher) {
 		this.launcher = launcher;
@@ -32,6 +35,8 @@ public class HackingToolsUI extends GridPane {
 		menuLabel = new Label("Hacker Man");
 		add(menuLabel, 0, 0);
 		initButtons();
+		
+		residentBob = new BobRoss();
 	}
 	
 	public void initButtons() {
@@ -39,45 +44,46 @@ public class HackingToolsUI extends GridPane {
 		tautologyAttackButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println("");
+				CP.println(residentBob.attack_hot_tautic("Test Base"));
 			}
 		});
 		add(tautologyAttackButton, 0, 1);
 		
-		secondOrderAttackButton = new Button("Second Order");
+		secondOrderAttackButton = new Button("Second Order Attack");
 		secondOrderAttackButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println("");
+				String args[] = {"admin", "false"};
+				CP.println(residentBob.attack_second_order("Test Base", args, "inference"));
 			}
 		});
 		add(secondOrderAttackButton, 0, 2);
 		
-		attack3Button = new Button("the 3rd?");
-		attack3Button.setOnAction(new EventHandler<ActionEvent>() {
+		piggyBackQueryButton = new Button("Piggy-back Query Attack");
+		piggyBackQueryButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println("");
+				CP.println(residentBob.attack_piggy_bois("Test Base", "*", "Table","1=1"));
 			}
 		});
-		add(attack3Button, 0, 3);
+		add(piggyBackQueryButton, 0, 3);
 		
-		attack4Button = new Button("4th ??");
-		attack4Button.setOnAction(new EventHandler<ActionEvent>() {
+		unionAttackButton = new Button("Union Attack");
+		unionAttackButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println("");
+				CP.println(residentBob.attack_union_jack("Test Base", "Attribute", "Table", "1 = 1"));
 			}
 		});
-		add(attack4Button, 0, 4);
+		add(unionAttackButton, 0, 4);
 		
-		attack5Button = new Button("5 ?");
-		attack5Button.setOnAction(new EventHandler<ActionEvent>() {
+		storedProcedureButton = new Button("Stored Procedure Attack");
+		storedProcedureButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println("");
+				CP.println(residentBob.attack_fatty_fatty_boombalady("Test Base", "SHUTDOWN"));
 			}
 		});
-		add(attack5Button, 0, 5);
+		add(storedProcedureButton, 0, 5);
 	}
 }
