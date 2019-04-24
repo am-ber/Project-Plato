@@ -31,10 +31,12 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import jdk.nashorn.api.scripting.JSObject;
+//import jdk.nashorn.api.scripting.JSObject;
 import netscape.javascript.JSException;
+import netscape.javascript.JSObject;
 import tools.CP;
 import tools.Scraper;
+import javax.script.*;
 
 public class Browser extends Region {
 
@@ -60,32 +62,45 @@ public class Browser extends Region {
 		getChildren().add(browser);
 		
 		browserUI = new BrowserUI(launcher);
-		
-		
-		
-		/*
-		reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("res/jquery/jquery-3.3.1.min.js")));
-		line = reader.readLine();
-		while(line != null) {
-	    jQueryContents.append(line);
-	    line = reader.readLine();
-	  }
-	  JSObject jQuery = null;
-	  try {
-	    jQuery = (JSObject) browser.getEngine().executeScript("");
-	  } catch(JSException jse) {
-	    //
-	  }
-	  if(jQuery == null) {
-	    browser.getEngine().executeScript(jQueryContents.toString());
-	  }
-	  */
+	  
+	  
 	  
 		
-	  /*
+	  
 		browserUI.hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
+        
+        
+        reader = new BufferedReader(new InputStreamReader(Browser.class.getResourceAsStream("jquery/jquery-3.3.1.min.js")));
+        try {
+          line = reader.readLine();
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        while(line != null) {
+          jQueryContents.append(line);
+          try {
+            line = reader.readLine();
+          } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        }
+        JSObject jQuery = null;
+        try {
+          jQuery = (JSObject) browser.getEngine().executeScript("$('body').css('background-color', 'blue');");
+          //jQuery = (JSObject) browser.getEngine().executeScript("$('input[value='Google Search']').val('testing');");
+        } catch(JSException jse) {
+          //
+        }
+        if(jQuery == null) {
+          browser.getEngine().executeScript(jQueryContents.toString());
+        }
+        
+        
+        
         launcher.getBrowser().printHTML(launcher.cacheLocation);
         
         String filepath = "res/cache.html";
@@ -103,9 +118,10 @@ public class Browser extends Region {
           //System.out.println("Hello");
         }
         
+        
       }
     });
-    */
+    
 		
 		
 		

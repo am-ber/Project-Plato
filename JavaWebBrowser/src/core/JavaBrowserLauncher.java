@@ -91,7 +91,9 @@ public class JavaBrowserLauncher extends Application {
 	public void refreshURL() {
 		browser.setWebPage(currentURL);
 	  // Jude's testing stuff
-    executejQuery(browser.webEngine, "3.3.1", "res/jquery/jquery-3.3.1.min.js", "alert('Hello');");
+		//System.out.println("Hello");
+    //Object temp = executejQuery(browser.webEngine, "3.3.1", "jquery/jquery-3.3.1.min.js", "$");
+    //System.out.println(temp);
 	}
 	
 	// Interrupts the thread safely
