@@ -142,30 +142,14 @@ public class BrowserUI extends GridPane {
 		
 		hackerMenueButton = new Button();
 		hackerMenueButton.setGraphic(new ImageView(hackerMenueImage));
+		/*
 		hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
 		  @Override
 			public void handle(ActionEvent arg0) {
 				launcher.getBrowser().printHTML(launcher.cacheLocation);
-				
-				/* Start weird scraper test thing 
-				String filepath = "res/cache.html";
-				String[] lines = null;
-				try {
-					lines = scrape.readInputHTML(Paths.get(filepath));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				List<String[]> identifiers = new ArrayList<String[]>();
-				identifiers = scrape.getIdentifiers(lines, "all");
-				for (int i = 0; i < identifiers.size(); i++) {
-					System.out.println(identifiers.get(i)[0] + ", Line:" + identifiers.get(i)[1] + ", Pos:" + identifiers.get(i)[2]);
-				  //System.out.println("Hello");
-				}
-				End weird scraper test thing */
-				
 			}
 		});
+		*/
 		add(hackerMenueButton, 5, 0);
 	}
 }

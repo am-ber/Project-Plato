@@ -72,6 +72,28 @@ public class Browser extends Region {
       public void handle(ActionEvent arg0) {
         
         
+        launcher.getBrowser().printHTML(launcher.cacheLocation);
+        
+        String filepath = "res/cache.html";
+        String[] lines = null;
+        try {
+          lines = scrape.readInputHTML(Paths.get(filepath));
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        List<String[]> identifiers = new ArrayList<String[]>();
+        identifiers = scrape.getIdentifiers(lines, "all");
+        for (int i = 0; i < identifiers.size(); i++) {
+          System.out.println(identifiers.get(i)[0] + ", Line:" + identifiers.get(i)[1] + ", Pos:" + identifiers.get(i)[2]);
+          //System.out.println("Hello");
+        }
+        
+        
+        
+        
+        
+        
         reader = new BufferedReader(new InputStreamReader(Browser.class.getResourceAsStream("jquery/jquery-3.3.1.min.js")));
         try {
           line = reader.readLine();
@@ -90,8 +112,8 @@ public class Browser extends Region {
         }
         JSObject jQuery = null;
         try {
-          jQuery = (JSObject) browser.getEngine().executeScript("$('body').css('background-color', 'blue');");
-          //jQuery = (JSObject) browser.getEngine().executeScript("$('input[value='Google Search']').val('testing');");
+          //jQuery = (JSObject) browser.getEngine().executeScript("$('body').css('background-color', 'blue');");
+          jQuery = (JSObject) browser.getEngine().executeScript("$('#inventoryBtn').html('testing');");
         } catch(JSException jse) {
           //
         }
@@ -100,23 +122,8 @@ public class Browser extends Region {
         }
         
         
-        
-        launcher.getBrowser().printHTML(launcher.cacheLocation);
-        
-        String filepath = "res/cache.html";
-        String[] lines = null;
-        try {
-          lines = scrape.readInputHTML(Paths.get(filepath));
-        } catch (IOException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-        List<String[]> identifiers = new ArrayList<String[]>();
-        identifiers = scrape.getIdentifiers(lines, "all");
-        for (int i = 0; i < identifiers.size(); i++) {
-          System.out.println(identifiers.get(i)[0] + ", Line:" + identifiers.get(i)[1] + ", Pos:" + identifiers.get(i)[2]);
-          //System.out.println("Hello");
-        }
+        //printHTML(launcher.cacheLocation);
+        //webEngine.load("res/cache.html");
         
         
       }

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import tools.CP;
 
 public class JavaBrowserLauncher extends Application {
-	public String currentURL = "https://www.google.com";
+	public String currentURL = "https://www.cs.siu.edu/~rstockstill/exstore"; // default https://www.google.com
 	public String cacheLocation = "res/cache.html";
 	public Scene mainScene;
 	public final int initWidth = 1450;
@@ -90,10 +90,6 @@ public class JavaBrowserLauncher extends Application {
 	// Will tell the browser to refresh the previous saved current URL
 	public void refreshURL() {
 		browser.setWebPage(currentURL);
-	  // Jude's testing stuff
-		//System.out.println("Hello");
-    //Object temp = executejQuery(browser.webEngine, "3.3.1", "jquery/jquery-3.3.1.min.js", "$");
-    //System.out.println(temp);
 	}
 	
 	// Interrupts the thread safely
@@ -101,27 +97,4 @@ public class JavaBrowserLauncher extends Application {
 		updateThread.interrupt();
 	}
 	
-	
-	
-	
-	public static Object executejQuery(final WebEngine engine, String minVersion, String jQueryLocation, String script) {
-	  return engine.executeScript(
-	      "(function(window, document, version, callback) { "
-	          + "var j, d;"
-	          + "var loaded = false;"
-	          + "if (!(j = window.jQuery) || version > j.fn.jquery || callback(j, loaded)) {"
-	          + "  var script = document.createElement(\"script\");"
-	          + "  script.type = \"text/javascript\";"
-	          + "  script.src = \"" + jQueryLocation + "\";"
-	          + "  script.onload = script.onreadystatechange = function() {"
-	          + "    if (!loaded && (!(d = this.readyState) || d == \"loaded\" || d == \"complete\")) {"
-	          + "      callback((j = window.jQuery).noConflict(1), loaded = true);"
-	          + "      j(script).remove();"
-	          + "    }"
-	          + "  };"
-	          + "  document.documentElement.childNodes[0].appendChild(script) "
-	          + "} "
-	          + "})(window, document, \"" + minVersion + "\", function($, jquery_loaded) {" + script + "});"
-	  );
-	}
 }
