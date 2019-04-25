@@ -110,6 +110,8 @@ public class HackingToolsUI extends GridPane {
 		submitOptions.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent event) {
+        launcher.getBrowser().printHTML(launcher.cacheLocation);
+        
         Scraper scrape = new Scraper();
         String filepath = "res/cache.html";
         String[] lines = null;
@@ -125,7 +127,7 @@ public class HackingToolsUI extends GridPane {
         for (String[] tuple : identifiers){
           clean_ids.add(tuple[0]);
         }
-        
+        submitOptions.getItems().clear();
         submitOptions.getItems().setAll(clean_ids);
       }
     });
