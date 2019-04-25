@@ -45,6 +45,7 @@ public class Browser extends Region {
 	public String outerHTML;
 	
 	public final WebEngine webEngine = browser.getEngine();
+	
 	private JavaBrowserLauncher launcher;
 	
 	private Scraper scrape = new Scraper();
@@ -62,9 +63,6 @@ public class Browser extends Region {
 		getChildren().add(browser);
 		
 		browserUI = new BrowserUI(launcher);
-	  
-	  
-	  
 		
 	  
 		browserUI.hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
