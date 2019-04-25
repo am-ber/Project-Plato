@@ -1,14 +1,25 @@
 package core.elements;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import core.JavaBrowserLauncher;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
+import netscape.javascript.JSException;
+import netscape.javascript.JSObject;
 import tools.CP;
+import tools.Scraper;
 import tools.BobRoss;
 
 public class HackingToolsUI extends GridPane {
@@ -64,12 +75,65 @@ public class HackingToolsUI extends GridPane {
 		secondOrderAttackButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				String args[] = {"admin", "false"};
-				CP.println(residentBob.attack_second_order("Test Base", args, "inference"));
+			  
 			}
 		});
-		add(secondOrderAttackButton, 0, 2);
+		add(secondOrderAttackButton, 0, 20);
 		*/
+		ComboBox<String> inputOptions = new ComboBox();    
+		inputOptions.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      @Override
+      public void handle(MouseEvent event) {
+        Scraper scrape = new Scraper();
+        String filepath = "res/cache.html";
+        String[] lines = null;
+        try {
+          lines = scrape.readInputHTML(Paths.get(filepath));
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        List<String[]> identifiers = new ArrayList<String[]>();
+        identifiers = scrape.getIdentifiers(lines, "all");
+        List<String> clean_ids = new ArrayList<String>();
+        for (String[] tuple : identifiers){
+          clean_ids.add(tuple[0]);
+        }
+        inputOptions.getItems().setAll(clean_ids);
+      }
+    });
+    
+    
+		add(inputOptions,0,20);
+		
+		ComboBox<String> submitOptions = new ComboBox();    
+		submitOptions.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      @Override
+      public void handle(MouseEvent event) {
+        Scraper scrape = new Scraper();
+        String filepath = "res/cache.html";
+        String[] lines = null;
+        try {
+          lines = scrape.readInputHTML(Paths.get(filepath));
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        List<String[]> identifiers = new ArrayList<String[]>();
+        identifiers = scrape.getIdentifiers(lines, "all");
+        List<String> clean_ids = new ArrayList<String>();
+        for (String[] tuple : identifiers){
+          clean_ids.add(tuple[0]);
+        }
+        
+        submitOptions.getItems().setAll(clean_ids);
+      }
+    });
+    
+    
+    add(submitOptions,1,20);
+		
+		
 		Label piggyAttackTitle = new Label("Piggy Back Attack");
     add(piggyAttackTitle, 0,4);
     

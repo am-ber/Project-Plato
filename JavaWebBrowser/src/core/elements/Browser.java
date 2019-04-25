@@ -68,8 +68,6 @@ public class Browser extends Region {
 		browserUI.hackerMenueButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
-        
-        
         launcher.getBrowser().printHTML(launcher.cacheLocation);
         
         String filepath = "res/cache.html";
