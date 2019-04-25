@@ -2,33 +2,99 @@
 <html>
 
 <head>
-  <style>
-    button {
-      height: 30px;
-      width: 30px;
-      outline: none;
-    }
-  </style>
-  
-  <script src="jquery-3.3.1.min.js"></script>
-  <script src="popup.js"></script>
-  
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/fontawesome/css/all.min.css" />
 </head>
 
 <body>
 
-  <div style="width:100px;">
-    <p>Function 1</p>
+  <div class="container" style="padding:10px;">
+    <img src="res/header.png" width="300px">
     <hr />
-    <p>Function 2</p>
-    <hr />
-    <p>Function 3</p>
-    <hr />
-    <p>Function 4</p>
-    <hr />
-    <p>Function 5</p>
+
+
+
+
+
+
+
+
+    <div id="page_container">
+
+      <form id="form_container">
+        <h5>UNION ATTACK</h5>
+
+        <div class="form-group">
+          <p style="margin-bottom:5px;"># of columns:</p>
+          <select class="form-control" id="union_column_selector">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <p style="margin-bottom:5px;">Column names:</p>
+          <input class="form-control" id="union_param_1" style="margin-bottom:10px;">
+          <input class="form-control" id="union_param_2" style="margin-bottom:10px;">
+          <input class="form-control" id="union_param_3" style="margin-bottom:10px;">
+          <input class="form-control" id="union_param_4" style="margin-bottom:10px;">
+          <input class="form-control" id="union_param_5" style="margin-bottom:10px;">
+        </div>
+
+      </form>
+
+      <p style="font-size:12px; margin-bottom:0;">Injection string preview:</p>
+      <p id="injection_string" style="color:limegreen; font-size:12px; font-family:monospace;">None</p>
+      <button id="test_btn" class="btn btn-primary">Inject</button>
+
+    </div>
+
+    <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item" id="page_1"><a class="page-link" href="#">1</a></li>
+        <li class="page-item" id="page_2"><a class="page-link" href="#">2</a></li>
+        <li class="page-item" id="page_3"><a class="page-link" href="#">3</a></li>
+        <li class="page-item" id="page_4"><a class="page-link" href="#">4</a></li>
+        <li class="page-item" id="page_5"><a class="page-link" href="#">5</a></li>
+        <li class="page-item" id="page_6"><a class="page-link" href="#">6</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
-  <button id="test_btn"></button>
+
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/popup.js"></script>
 </body>
 
 </html>
