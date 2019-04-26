@@ -27,6 +27,9 @@ public class HackingToolsUI extends GridPane {
 	@SuppressWarnings("unused")
 	private JavaBrowserLauncher launcher;
 	
+	ComboBox<String> inputOptions;
+	ComboBox<String> submitOptions;
+	
 	private Button tautologyAttackButton;
 	private Button secondOrderAttackButton;
 	private Button piggyQueryButton;
@@ -52,36 +55,8 @@ public class HackingToolsUI extends GridPane {
 	}
 	
 	public void initButtons() {
-	  Label tautologyAttackTitle = new Label("Tautology Attack");
-	  add(tautologyAttackTitle, 0,1);
-	  
-	  Label tautologyAttackBaseLbl = new Label("Base Text:");
-    add(tautologyAttackBaseLbl, 0,2);
-	  
-    TextField tautologyAttackBaseText = new TextField();
-    add(tautologyAttackBaseText, 1, 2);
-    
-		tautologyAttackButton = new Button("Attack");
-		tautologyAttackButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-				CP.println(residentBob.attack_hot_tautic(tautologyAttackBaseText.getText()));
-			}
-		});
-		add(tautologyAttackButton, 0, 3);
-		
-		/*
-		secondOrderAttackButton = new Button("Second Order Attack");
-		secondOrderAttackButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-			  
-			}
-		});
-		add(secondOrderAttackButton, 0, 20);
-		*/
-		ComboBox<String> inputOptions = new ComboBox();    
-		inputOptions.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	  inputOptions = new ComboBox();    
+    inputOptions.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent event) {
         Scraper scrape = new Scraper();
@@ -102,12 +77,10 @@ public class HackingToolsUI extends GridPane {
         inputOptions.getItems().setAll(clean_ids);
       }
     });
+    add(inputOptions,0,20);
     
-    
-		add(inputOptions,0,20);
-		
-		ComboBox<String> submitOptions = new ComboBox();    
-		submitOptions.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    submitOptions = new ComboBox();    
+    submitOptions.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent event) {
         launcher.getBrowser().printHTML(launcher.cacheLocation);
@@ -131,10 +104,37 @@ public class HackingToolsUI extends GridPane {
         submitOptions.getItems().setAll(clean_ids);
       }
     });
-    
-    
     add(submitOptions,1,20);
+	  
+	  
+	  Label tautologyAttackTitle = new Label("Tautology Attack");
+	  add(tautologyAttackTitle, 0,1);
+	  
+	  Label tautologyAttackBaseLbl = new Label("Base Text:");
+    add(tautologyAttackBaseLbl, 0,2);
+	  
+    TextField tautologyAttackBaseText = new TextField();
+    add(tautologyAttackBaseText, 1, 2);
+    
+		tautologyAttackButton = new Button("Attack");
+		tautologyAttackButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+			  happy_accident(residentBob.attack_hot_tautic(tautologyAttackBaseText.getText()));
+			}
+		});
+		add(tautologyAttackButton, 0, 3);
 		
+		/*
+		secondOrderAttackButton = new Button("Second Order Attack");
+		secondOrderAttackButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+			  
+			}
+		});
+		add(secondOrderAttackButton, 0, 20);
+		*/		
 		
 		Label piggyAttackTitle = new Label("Piggy Back Attack");
     add(piggyAttackTitle, 0,4);
@@ -167,7 +167,7 @@ public class HackingToolsUI extends GridPane {
     piggyQueryButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println(residentBob.attack_piggy_bois(piggyAttackBaseText.getText(), piggyAttackAttrText.getText(), piggyAttackTableText.getText(),piggyAttackEqualityText.getText()));
+			  happy_accident(residentBob.attack_piggy_bois(piggyAttackBaseText.getText(), piggyAttackAttrText.getText(), piggyAttackTableText.getText(),piggyAttackEqualityText.getText()));
 			}
 		});
 		add(piggyQueryButton, 0, 9);
@@ -204,7 +204,7 @@ public class HackingToolsUI extends GridPane {
 		unionAttackButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println(residentBob.attack_union_jack(unionAttackBaseText.getText(), unionAttackAttrText.getText(), unionAttackTableText.getText(), unionAttackEqualityText.getText()));
+			  happy_accident(residentBob.attack_union_jack(unionAttackBaseText.getText(), unionAttackAttrText.getText(), unionAttackTableText.getText(), unionAttackEqualityText.getText()));
 			}
 		});
 		add(unionAttackButton, 0, 15);
@@ -228,9 +228,21 @@ public class HackingToolsUI extends GridPane {
 		storedProcedureButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				CP.println(residentBob.attack_fatty_fatty_boombalady(procAttackBaseText.getText(), procAttackProcText.getText()));
+				happy_accident(residentBob.attack_fatty_fatty_boombalady(procAttackBaseText.getText(), procAttackProcText.getText()));
 			}
 		});
 		add(storedProcedureButton, 0, 19);
+	}
+	
+	public void happy_accident(String attack){
+	  String target = inputOptions.getValue();
+	  String submit = submitOptions.getValue();
+	  
+	  if(target == null || submit == null){
+	    CP.println("Whoops, Looks like one of your options wasn't selected");
+	    return;
+	  }
+	  CP.println(attack);
+	  // PUT THE JQUERY IN HERE ME BOI //
 	}
 }
