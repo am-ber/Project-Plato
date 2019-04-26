@@ -244,6 +244,6 @@ public class HackingToolsUI extends GridPane {
 	  }
 	  CP.println(attack);
 	  // PUT THE JQUERY IN HERE ME BOI //
-	  launcher.browser.executeJquery(target, "euuuhuhuh", 0);
+	  launcher.browser.executeJquery(target, attack, 0);
 	}
 }
