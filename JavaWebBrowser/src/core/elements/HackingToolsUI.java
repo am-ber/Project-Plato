@@ -234,7 +234,7 @@ public class HackingToolsUI extends GridPane {
 		add(storedProcedureButton, 0, 19);
 	}
 	
-	public void happy_accident(String attack){
+	public void happy_accident(String request){
 	  String target = inputOptions.getValue();
 	  String submit = submitOptions.getValue();
 	  
@@ -242,8 +242,8 @@ public class HackingToolsUI extends GridPane {
 	    CP.println("Whoops, Looks like one of your options wasn't selected");
 	    return;
 	  }
-	  CP.println(attack);
+	  CP.println(request);
 	  // PUT THE JQUERY IN HERE ME BOI //
-	  launcher.browser.executeJquery(target, attack, 0);
+	  launcher.browser.executeJquery(target, request, 0);
 	}
 }

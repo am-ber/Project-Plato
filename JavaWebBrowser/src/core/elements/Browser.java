@@ -206,7 +206,8 @@ public class Browser extends Region {
     try {
       if(flag == 0) {
         // Inserting text
-        jQuery = (JSObject) browser.getEngine().executeScript("$('#" + tag + "').val('" + val.toString() + "');");
+        String script = "$('#" + tag + "').val('" + val.replace("\'", "\\\'") + "');";
+        jQuery = (JSObject) browser.getEngine().executeScript(script);
       } else {
         // Click button
         jQuery = (JSObject) browser.getEngine().executeScript("$('#" + tag + "').click();");
