@@ -208,9 +208,12 @@ public class Browser extends Region {
         // Inserting text
         String script = "$('#" + tag + "').val('" + val.replace("'", "\\'") + "');";
         jQuery = (JSObject) browser.getEngine().executeScript(script);
-      } else {
+      } else if(flag == 1) {
         // Click button
         jQuery = (JSObject) browser.getEngine().executeScript("$('#" + tag + "').click();");
+      } else {
+        // Highlight input
+        jQuery = (JSObject) browser.getEngine().executeScript("$('#" + tag + "').css('background-color', 'khaki');");
       }
     } catch(JSException jse) {
       //
