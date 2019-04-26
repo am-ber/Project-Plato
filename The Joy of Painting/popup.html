@@ -9,7 +9,7 @@
 <body>
 
   <div class="container" style="padding:10px;">
-    <img src="res/header.png" width="300px">
+    <img src="res/header.png" width="280px">
     <hr />
 
 
@@ -21,7 +21,7 @@
 
     <div id="page_container">
 
-      <form id="form_container">
+      <form id="form_container_union">
         <h5>UNION ATTACK</h5>
 
         <div class="form-group">
@@ -38,17 +38,38 @@
         <div class="form-group">
           <p style="margin-bottom:5px;">Column names:</p>
           <input class="form-control" id="union_param_1" style="margin-bottom:10px;">
-          <input class="form-control" id="union_param_2" style="margin-bottom:10px;">
-          <input class="form-control" id="union_param_3" style="margin-bottom:10px;">
-          <input class="form-control" id="union_param_4" style="margin-bottom:10px;">
-          <input class="form-control" id="union_param_5" style="margin-bottom:10px;">
+          <input class="form-control" id="union_param_2" style="margin-bottom:10px;" disabled>
+          <input class="form-control" id="union_param_3" style="margin-bottom:10px;" disabled>
+          <input class="form-control" id="union_param_4" style="margin-bottom:10px;" disabled>
+          <input class="form-control" id="union_param_5" style="margin-bottom:10px;" disabled>
         </div>
 
+        <div class="form-group">
+          <p style="margin-bottom:5px;">Table name:</p>
+          <input class="form-control" id="union_param_6" style="margin-bottom:10px;">
+        </div>
       </form>
+
+
+
+
+
+
+
+      <form id="form_container_tautology">
+        <h5>TAUTOLOGY ATTACK</h5>
+      </form>
+
+
+
+
+
+
 
       <p style="font-size:12px; margin-bottom:0;">Injection string preview:</p>
       <p id="injection_string" style="color:limegreen; font-size:12px; font-family:monospace;">None</p>
-      <button id="test_btn" class="btn btn-primary">Inject</button>
+      <button id="btn_inject" type="button" class="btn btn-danger">Inject</button>
+
 
     </div>
 
@@ -88,6 +109,17 @@
         </li>
       </ul>
     </nav>
+
+
+    <hr />
+
+    <div style="width:100%; text-align:center;">
+      <a id="highlighter" href="#" style="color:#007bff; text-decoration:none;">Enable form
+        highlighting</a>
+    </div>
+
+
+
   </div>
 
 
