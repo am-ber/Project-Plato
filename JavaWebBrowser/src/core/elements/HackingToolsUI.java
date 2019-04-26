@@ -77,6 +77,13 @@ public class HackingToolsUI extends GridPane {
         inputOptions.getItems().setAll(clean_ids);
       }
     });
+    
+    inputOptions.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent arg0) {
+        String target = inputOptions.getValue();
+      }
+    });
     add(inputOptions,0,20);
     
     submitOptions = new ComboBox();    
@@ -102,6 +109,13 @@ public class HackingToolsUI extends GridPane {
         }
         submitOptions.getItems().clear();
         submitOptions.getItems().setAll(clean_ids);
+      }
+    });
+    
+    submitOptions.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent arg0) {
+        String target = submitOptions.getValue();
       }
     });
     add(submitOptions,1,20);
@@ -243,7 +257,6 @@ public class HackingToolsUI extends GridPane {
 	    return;
 	  }
 	  CP.println(request);
-	  // PUT THE JQUERY IN HERE ME BOI //
 	  launcher.browser.executeJquery(target, request, 0);
 	}
 }
