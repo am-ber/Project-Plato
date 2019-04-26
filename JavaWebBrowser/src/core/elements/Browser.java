@@ -82,14 +82,15 @@ public class Browser extends Region {
         identifiers = scrape.getIdentifiers(lines, "all");
         for (int i = 0; i < identifiers.size(); i++) {
           System.out.println(identifiers.get(i)[0] + ", Line:" + identifiers.get(i)[1] + ", Pos:" + identifiers.get(i)[2]);
-          //System.out.println("Hello");
         }
         
         
         
+        executeJquery("inventoryText", "Test text", 0);
         
         
         
+        /*
         reader = new BufferedReader(new InputStreamReader(Browser.class.getResourceAsStream("jquery/jquery-3.3.1.min.js")));
         try {
           line = reader.readLine();
@@ -106,16 +107,19 @@ public class Browser extends Region {
             e.printStackTrace();
           }
         }
+        browser.getEngine().executeScript(jQueryContents.toString());
         JSObject jQuery = null;
         try {
           //jQuery = (JSObject) browser.getEngine().executeScript("$('body').css('background-color', 'blue');");
-          jQuery = (JSObject) browser.getEngine().executeScript("$('#inventoryBtn').html('testing');");
+          //jQuery = (JSObject) browser.getEngine().executeScript("$('#inventoryBtn').html('testing');");
+          jQuery = (JSObject) browser.getEngine().executeScript("$('#inventoryText').val('Injected text');");
         } catch(JSException jse) {
           //
         }
         if(jQuery == null) {
           browser.getEngine().executeScript(jQueryContents.toString());
         }
+        */
         
         
         //printHTML(launcher.cacheLocation);
@@ -178,6 +182,41 @@ public class Browser extends Region {
 
 	protected double computePrefHeight(double width) {
 		return 720;
+	}
+	
+	public void executeJquery(String tag, String val, int flag) {
+	  reader = new BufferedReader(new InputStreamReader(Browser.class.getResourceAsStream("jquery/jquery-3.3.1.min.js")));
+    try {
+      line = reader.readLine();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    while(line != null) {
+      jQueryContents.append(line);
+      try {
+        line = reader.readLine();
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+    browser.getEngine().executeScript(jQueryContents.toString());
+    JSObject jQuery = null;
+    try {
+      if(flag == 0) {
+        // Inserting text
+        jQuery = (JSObject) browser.getEngine().executeScript("$('#" + tag + "').val('" + val + "');");
+      } else {
+        // Click button
+        jQuery = (JSObject) browser.getEngine().executeScript("$('#" + tag + "').click();");
+      }
+    } catch(JSException jse) {
+      //
+    }
+    if(jQuery == null) {
+      browser.getEngine().executeScript(jQueryContents.toString());
+    }
 	}
 	
 }
