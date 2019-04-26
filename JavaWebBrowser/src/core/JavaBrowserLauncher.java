@@ -20,7 +20,7 @@ public class JavaBrowserLauncher extends Application {
 	
 	private GridPane mainPane;
 	private JavaBrowserUpdateThread updateThread;
-	private Browser browser;
+	public Browser browser;
 
 	public HackingToolsUI htUI;
 
