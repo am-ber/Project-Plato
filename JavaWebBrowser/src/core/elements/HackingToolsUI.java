@@ -82,6 +82,7 @@ public class HackingToolsUI extends GridPane {
       @Override
       public void handle(ActionEvent arg0) {
         String target = inputOptions.getValue();
+        launcher.browser.executeJquery(target, null, 2);
       }
     });
     add(inputOptions,0,20);
@@ -116,6 +117,7 @@ public class HackingToolsUI extends GridPane {
       @Override
       public void handle(ActionEvent arg0) {
         String target = submitOptions.getValue();
+        launcher.browser.executeJquery(target, null, 2);
       }
     });
     add(submitOptions,1,20);
