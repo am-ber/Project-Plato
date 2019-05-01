@@ -37,3 +37,71 @@ The chrome extension's use is fairly simple post-installation. Simply click on t
 For using the browser portion of the project, running the java project from ecclipse will open up a rudimentary broswer window with a sidebar suite of attack methonds. Highlight your input and submit buttons in the form using the drop down arrows and fill out any of the attack forms to form an attack against the website.
 
 ## Folder Contents (main files, figures, videos etc.)
+
+Directory Structure
+
+ -- Documentation
+ 
+ -- Java Web Browser
+ 
+    -- res
+    
+    -- src
+    
+ -- Scraper
+    
+ -- Joy of Painting
+ 
+    -- css
+    
+    -- js
+    
+    -- res
+    
+    -- manifest.json
+    
+    -- popup.html
+    
+### Documentation
+
+Folder for the presentation and proposal document for the project
+
+### Java Web Browser
+
+Folder for our Java Web Browser Ecclipse project
+
+#### Java Web Browser - res
+
+Various resources for the Java Web Browser
+
+#### Java Web Browser - src
+
+Source code for the Java Web Browser
+
+### Scraper
+
+A website scraper that is used by the web browser to retrieve website data. Has been moved into the Java Web Browser tools package now
+
+### Joy of Painting
+
+This is the code for the chrome extension portion of the project
+
+#### Joy of Painting - css
+
+The css files for the general style of the popup
+
+#### Joy of Painting - js
+
+The javascript files for the dynamic handling of the popup
+
+#### Joy of Painting - res
+
+Some resources for the popup window
+
+#### Joy of Painting - manifest.json
+
+A file containing package information for the chrome extension
+
+#### Joy of Painting - popup.html
+
+The actual "web app" code proper for the extension
